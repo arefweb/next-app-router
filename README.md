@@ -30,7 +30,7 @@ npx msw init <PUBLIC_DIR> --save
 
 Then you have to setup the browser worker, you can see how it is done in `./mock/browser.ts`
 
-##### Conditionally enable mocking in the browser:
+#### Conditionally enable mocking in the browser:
 `./app/msw-provider.tsx` file shows you how the condition is applied. remember that 
 you have to add `NEXT_PUBLIC_` prefix to the environment variable in order to enable it
 for both server and client environments. This is the convention of Next.js.
@@ -96,3 +96,9 @@ or not. Suspense can't work without `use`.
 Form the explanations above we understand that the mixture of `Suspense` and `use` in our client component that
 is responsible for creating a waiting for our client side MSW code, does actually work because this is the way 
 Next.js is created and understands.
+
+
+##### Some Resources:
+
+- [Next.js example of MSW](https://github.com/mswjs/examples/blob/with-next/examples/with-next/app/msw-provider.tsx)
+- [Browser integration sample in MSW site](https://mswjs.io/docs/integrations/browser)
