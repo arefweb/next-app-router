@@ -1,6 +1,21 @@
+import axios from 'axios';
 import Image from "next/image";
 
-export default function Home() {
+async function fetchData() {
+  try {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+}
+
+async function Home() {
+  const data = await fetchData();
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -12,6 +27,7 @@ export default function Home() {
           height={38}
           priority
         />
+        <p>Title: {data?.title}</p>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
@@ -101,3 +117,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

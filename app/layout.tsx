@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+
+import { MSWProvider } from "./msw-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <MSWProvider>
+          <nav className="flex border-b-1 border-b-blue-800">
+            <span className="p-4 border-b-2 border-indigo-500">
+              <Link href="/">Home</Link>
+            </span>
+            <span className="p-4 border-b-2 border-indigo-500">
+              <Link href="/about">About</Link>
+            </span>
+          </nav>
+          {children}
+        </MSWProvider>
       </body>
     </html>
   );
