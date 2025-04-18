@@ -102,3 +102,12 @@ Next.js is created and understands.
 
 - [Next.js example of MSW](https://github.com/mswjs/examples/blob/with-next/examples/with-next/app/msw-provider.tsx)
 - [Browser integration sample in MSW site](https://mswjs.io/docs/integrations/browser)
+
+
+## Express.js Server
+Here in this repository I have added an express.js server for my experiments and practice.
+you can find it in this path: `./server`. By running `yarn devServer` in the project root, you can start the dev server of the express which contains some demo APIs. 
+Alternativly you can run the dev server by cd to `./server` then run `yarn dev` there as well.
+
+Express server is for demo and practice purposes and you can add routes to it as you wish.
+

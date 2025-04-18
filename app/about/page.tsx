@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useEffect } from "react";
-import axios from 'axios';
+import http from '@/services/http';
 
 function AboutPage() {
   
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/todos")
-    .then((resp) => {
-      console.log("response of todos in client >> ", resp.data);
-    });
+    http
+      .get("/users", undefined, 3)
+      .then((resp) => {
+        console.log("response of 5005 >> ", resp);
+      });
   }, []);
   
 
