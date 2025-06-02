@@ -10,4 +10,7 @@ export const handlers = [
   http.get("https://jsonplaceholder.typicode.com/todos", () =>
     HttpResponse.json(todos)
   ),
+  http.get("http://localhost:5005/api/users", () => 
+    HttpResponse.json([{ first_name: 'Aref', last_name: 'Movahedzadeh' }])
+  ),
 ];
