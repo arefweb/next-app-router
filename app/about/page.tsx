@@ -1,21 +1,19 @@
-"use client";
-
-import React, { useEffect } from "react";
 import http from '@/services/http';
 
-function AboutPage() {
-  
-  useEffect(() => {
-    http
-      .get("/users", undefined, 3)
-      .then((resp) => {
-        console.log("response of 5005 >> ", resp);
-      });
-  }, []);
-  
+import Users from "./components/users/Users";
+
+async function AboutPage({ searchParams }) {
+  const resp = await http.get("/address");
+  const address = resp.data.data;
+  // const { searchParams } = await params;
+  console.log("searchParams  >> ", searchParams.test);
 
   return (
-    <div className="flex flex-row bg-[#EBF3F5] items-center justify-center sm:px-8 px-0 ss:py-12 py-0">
+    <div className="flex flex-col bg-[#EBF3F5] items-center justify-center sm:px-8 px-0 ss:py-12">
+      <div>
+        <h3>Address:</h3>
+        <p className="font-bold">{address}</p>
+      </div>
       <div className="flex sm:flex-row flex-col bg-[#1E2C30] md:my-8 my-0 py-8 sm:px-6 px-4 items-center justify-center ss:rounded-[20px] rounded-none">
         <div className="flex flex-col md:px-16 px-0 pl-8 md:py-0 sm:py-6 py-4">
           <p className="text-[#FFF] font-manrope text-[15px] font-normal leading-[154.5%] tracking-wide uppercase">
@@ -32,6 +30,7 @@ function AboutPage() {
           </p>
         </div>
       </div>
+      <Users />
     </div>
   );
 }
