@@ -1,7 +1,7 @@
 import Users from "./components/users/Users";
 import getAbout from './utils/get-about';
 
-async function AboutPage({ searchParams }) {
+async function AboutPage() {
   const { address } = await getAbout();
 
   return (

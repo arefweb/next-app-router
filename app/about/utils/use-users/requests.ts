@@ -1,4 +1,4 @@
-import http, { HttpResponse } from "@/services/http";
+import http, { HttpResponse } from "@/shared/services/http";
 
 import {
   ResponseBody,

@@ -1,4 +1,4 @@
-import http from "@/services/http";
+import http from "@/shared/services/http";
 
 async function getAbout() {
   const resp = await http.get("/address");

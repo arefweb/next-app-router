@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import { createMockCycle } from "@/mock/utils";
+import { createMockCycle } from "@/shared/mock/utils";
 
 const aboutMockHandler = () => {
   const mockCycle = createMockCycle();

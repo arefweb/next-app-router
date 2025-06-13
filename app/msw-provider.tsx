@@ -2,8 +2,8 @@
 
 import { Suspense, use } from "react";
 
-import { handlers } from '@/mock/handlers';
-import { mockEnabled } from "@/constants/env";
+import { handlers } from '@/shared/mock/handlers';
+import { mockEnabled } from "@/shared/constants/env";
 
 // const ClientMockDev = () => {
 //   useEffect(() => {
@@ -23,7 +23,7 @@ import { mockEnabled } from "@/constants/env";
 
 const mockingEnabledPromise =
   typeof window !== "undefined" && mockEnabled
-    ? import("@/mock/browser").then(async ({ worker }) => {
+    ? import("@/shared/mock/browser").then(async ({ worker }) => {
         await worker.start({
           onUnhandledRequest(request, print) {
             if (request.url.includes("_next")) {

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import QueryProvider from '@/services/query/QueryProvider';
-import Header from "@/components/header";
+import QueryProvider from '@/shared/services/query/QueryProvider';
+import Header from "@/shared/components/header";
 
 import { MSWProvider } from "./msw-provider";
 
