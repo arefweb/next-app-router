@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+
+import QueryProvider from '@/services/query/QueryProvider';
+import Header from "@/components/header";
 
 import { MSWProvider } from "./msw-provider";
 
@@ -31,15 +33,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <MSWProvider>
-          <nav className="flex border-b-1 border-b-blue-800">
-            <span className="p-4 border-b-2 border-indigo-500">
-              <Link href="/">Home</Link>
-            </span>
-            <span className="p-4 border-b-2 border-indigo-500">
-              <Link href="/about">About</Link>
-            </span>
-          </nav>
-          {children}
+          <QueryProvider>
+            <Header />
+            {children}
+          </QueryProvider>
         </MSWProvider>
       </body>
     </html>

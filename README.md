@@ -51,11 +51,11 @@ That's because useEffect is executed immediately and doesn't wait for the loadin
 
 Let's talk more about `Suspense` and `use` in React:
 
-Suspense is a React component that can wait for a internal chaild that has a promise to be setteled and then
-shows the result and during this time it shows a fallback component like loading. However Suspense needs `use` 
+Suspense is a React component that can wait for an internal child that has a promise to be settled and then
+shows the result and during this time it shows a fallback component like loading. However, Suspense needs `use` 
 to work correctly.
 
-`use` is a React API that lets you to read the value of a resource like a Promise or context.
+`use` is a React API that lets you read the value of a resource like a Promise or context.
 In Next.js we may see this as a promise to be created in a parent server component and passed to a 
 child "client component" as props. then the child component resolves the promise with `use` API.
 
@@ -93,7 +93,7 @@ The answer is that because in that case the Suspense or even ErrorBoundary paren
 any signal whether promise has finished! `use` actually signals components like Suspense to show the fallback
 or not. Suspense can't work without `use`.
 
-Form the explanations above we understand that the mixture of `Suspense` and `use` in our client component that
+From the explanations above we understand that the mixture of `Suspense` and `use` in our client component that
 is responsible for creating a waiting for our client side MSW code, does actually work because this is the way 
 Next.js is created and understands.
 

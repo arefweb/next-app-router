@@ -61,6 +61,16 @@ async function get<T = any, R = AxiosResponse<T>, D = any>(
 
 http.get = get;
 
+// Create a utility type to extract the inner type of data
+type ExtractData<T> = T extends { data: infer U } ? U : never;
+
+// Define the HttpResponse type that extends AxiosResponse
+type HttpResponse<T> = AxiosResponse<ExtractData<T>>;
+
+export type {
+  HttpResponse,
+};
+
 export default http;
 
 {/** 

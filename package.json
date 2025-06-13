@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3223 --turbopack",
     "build": "next build",
     "start": "next start",
     "devServer": "yarn --cwd ./server dev",
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.80.6",
     "axios": "^1.8.4",
+    "clsx": "^2.1.1",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -24,6 +26,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "msw": "^2.7.3",
+    "nodemon": "^3.1.10",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
