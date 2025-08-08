@@ -1,11 +1,13 @@
 import { http, HttpResponse } from 'msw';
 import { createMockCycle } from "@/shared/mock/utils";
 
-const aboutMockHandler = () => {
+const addressMockHandler = () => {
   const mockCycle = createMockCycle();
 
   return http.get("http://localhost:5005/api/address", () => {
     return mockCycle([
+      HttpResponse.json({ message: 'Bad Request' }, { status: 400 }),
+      HttpResponse.json({ message: 'Internal Server Error' }, { status: 500 }),
       HttpResponse.json({
         data: 'تهران خیابان ولیعصر مجتمع افق پلاک ۳۴۴۱ طبقه چهارم، شرکت مبنا'
       }),
@@ -19,4 +21,4 @@ const aboutMockHandler = () => {
   });
 }
 
-export default aboutMockHandler;
+export default addressMockHandler;

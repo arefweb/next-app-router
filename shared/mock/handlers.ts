@@ -1,7 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
-import aboutMockHandler from '@/app/about/utils/get-about/mock';
+import addressMockHandler from '@/app/about/utils/get-address/mock';
 import usersMockHandler from '@/app/about/utils/use-users/mock';
+import serverInfoMockHandler from '@/app/server-comp/utils/get-server-info/mock';
 
 import todo from './data/todo.json';
 import todos from './data/todos.json';
@@ -14,5 +15,6 @@ export const handlers = [
     HttpResponse.json(todos)
   ),
   usersMockHandler(),
-  aboutMockHandler(),
+  addressMockHandler(),
+  serverInfoMockHandler(),
 ]

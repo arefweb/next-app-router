@@ -13,7 +13,9 @@ function QueryProvider({ children }: Props) {
   * a state is to ensure that data is not SHARED between different users and requests while still
   * only creating the queryClient once per component lifeCycle.
   * */
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({ defaultOptions: {
+    queries: { retry: false },
+  }}));
   return (
     <QueryClientProvider client={queryClient}>
       {children}

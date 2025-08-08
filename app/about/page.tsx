@@ -1,15 +1,19 @@
 import Users from "./components/users/Users";
-import getAbout from './utils/get-about';
+import getAddress from './utils/get-address';
+import AddressRetry from './components/address-retry/AddressRetry';
 
 async function AboutPage() {
-  const { address } = await getAbout();
+  const response = await getAddress();
+  const address = response?.data?.data;
 
   return (
     <div className="flex flex-col bg-[#EBF3F5] items-center justify-center sm:px-8 px-0 ss:py-12">
-      <div>
-        <h3>Address:</h3>
-        <p className="font-bold">{address}</p>
-      </div>
+      {response.ok ? (
+        <div>
+          <h3>Address:</h3>
+          <p className="font-bold">{address}</p>
+        </div>
+      ) : (<AddressRetry />)}
       <div className="flex sm:flex-row flex-col bg-[#1E2C30]
       md:my-8 my-0 py-8 sm:px-6 px-4 items-center
       justify-center ss:rounded-[20px] rounded-none">

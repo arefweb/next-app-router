@@ -1,0 +1,1 @@
+export const CLIENT_MOCK_KEY = 'CLIENT_MOCK';

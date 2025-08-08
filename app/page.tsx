@@ -1,4 +1,4 @@
-import axios from 'axios';
+import http from "@/shared/services/http";
 import Image from "next/image";
 import members from '@/assets/images/members.svg';
 import association from "@/assets/images/association.svg";
@@ -6,10 +6,11 @@ import groups from "@/assets/images/groups.svg";
 
 async function fetchData() {
   try {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos/1"
+    const response = await http.get(
+      "/todos/1",
+      { baseURL: 'https://jsonplaceholder.typicode.com' }
     );
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return null;
@@ -17,7 +18,15 @@ async function fetchData() {
 }
 
 async function Home() {
-  const data = await fetchData();
+  const response = await fetchData();
+
+
+  console.log('response todos >> ', {
+    data: response?.data,
+    status: response?.status,
+    statusText: response?.statusText,
+    ok: response?.ok,
+  });
 
   return (
     <div>

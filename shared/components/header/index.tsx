@@ -16,6 +16,9 @@ function Header() {
         <span className={clsx("p-4", pathname === '/about' && 'border-b-2 border-indigo-500')}>
           <Link href="/about">About</Link>
         </span>
+        <span className={clsx("p-4", pathname === '/server-comp' && 'border-b-2 border-indigo-500')}>
+          <Link href="/server-comp">Server Comp</Link>
+        </span>
       </nav>
     </div>
   );
