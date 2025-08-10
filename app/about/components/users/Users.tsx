@@ -1,6 +1,6 @@
 "use client";
 
-import useUsers from "../../utils/use-users";
+import useUsers from "../../functions/use-users";
 
 function Users() {
   const {

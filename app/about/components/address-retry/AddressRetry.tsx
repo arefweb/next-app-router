@@ -16,8 +16,6 @@ function AddressRetry() {
     queryFn: () => http.get("/address"),
   });
 
-  console.log('data address >> ', data);
-
   if (isLoading) return <div>Loading...</div>;
   if (isError) {
     return (

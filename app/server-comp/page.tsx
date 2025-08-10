@@ -1,4 +1,4 @@
-import getServerInfo from "@/app/server-comp/utils/get-server-info";
+import getServerInfo from "@/app/server-comp/functions/get-server-info";
 
 
 async function ServerComp() {

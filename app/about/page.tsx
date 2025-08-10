@@ -1,5 +1,5 @@
 import Users from "./components/users/Users";
-import getAddress from './utils/get-address';
+import getAddress from './functions/get-address';
 import AddressRetry from './components/address-retry/AddressRetry';
 
 async function AboutPage() {
