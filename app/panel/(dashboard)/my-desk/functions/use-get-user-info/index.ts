@@ -8,6 +8,7 @@ function useGetUserInfo() {
     isLoading,
     isError,
     refetch,
+    isFetching,
   } = useQuery({
     queryFn: () => getUserInfo(),
     queryKey: ['USER_INFO'],
@@ -19,6 +20,7 @@ function useGetUserInfo() {
     isLoading,
     isError,
     refetch,
+    isFetching,
   }
 }
 

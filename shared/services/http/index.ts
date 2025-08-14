@@ -1,45 +1,22 @@
-import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig,} from "axios";
+import axios, {
+  AxiosRequestConfig,
+} from "axios";
 
-// eslint-disable-next-line
-type AnyType = any;
-
-interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
-  retryNumber?: number;
-}
-
-export interface CustomAxiosError<T = AnyType, D = AnyType> extends AxiosError<T, D> {
-  config?: CustomAxiosRequestConfig;
-  ok: false;
-}
-
-export interface CustomAxiosResponse<T = AnyType, D = AnyType> extends AxiosResponse<T, D> {
-  ok: true;
-}
-
-interface CustomAxiosInstance extends AxiosInstance {
-  get<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
-    url: string,
-    config?: AxiosRequestConfig<D>,
-    retryAttempts?: number
-  ): Promise<R>;
-}
+import {
+  CustomAxiosError,
+  AnyType,
+  CustomAxiosResponse,
+  CustomAxiosInstance,
+  HttpResponse,
+  CustomAxiosResult,
+} from './types';
+import { handleCommonErrors, enrichResponse } from './utils';
 
 const http = axios.create({
   baseURL: "http://localhost:5005/api",
 }) as CustomAxiosInstance;
 http.defaults.headers.common["Authorization"] = "Bearer TESTI";
 
-function enrichResponse<T, D>(response: CustomAxiosResponse<T, D>) {
-  const status = response.status;
-  const ok = (status >= 200 && status < 300);
-  if (status && (status >= 200 && status < 300)) {
-    response.ok = true;
-  }
-  return {
-    ...response,
-    ok,
-  };
-}
 
 const originalGet = http.get;
 async function get<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
@@ -51,45 +28,68 @@ async function get<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
     return await originalGet<T, R>(url, config).then(r => enrichResponse(r as CustomAxiosResponse<T>) as R);
   } catch(err) {
     const error = err as CustomAxiosError<T>;
-    if (retryAttempts && error.config) {
-      if (!error.config.retryNumber) {
-        error.config.retryNumber = 1;
-      }
-      if (error && error.config.retryNumber <= retryAttempts) {
-        try {
-          return await get<T, R>(url, error.config);
-        } catch {
-          error.config.retryNumber += 1;
-        }
-      }
-    }
-    const enrichedError = {
-      ...error.toJSON?.() ?? {},
-      ok: false,
-      status: error.status,
-      message: error.message,
-    };
-    return Promise.reject(enrichedError);
+    const cb = () => get<T, R>(url, error.config);
+    return await handleCommonErrors(error, cb, retryAttempts);
+  }
+}
+
+const originalDelete = http.delete;
+async function del<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
+  url: string,
+  config?: AxiosRequestConfig<D>,
+  retryAttempts?: number,
+): Promise<R> {
+  try {
+    return await originalDelete<T, R>(url, config).then(r => enrichResponse(r as CustomAxiosResponse<T>) as R);
+  } catch(err) {
+    const error = err as CustomAxiosError<T>;
+    const cb = () => del<T, R>(url, error.config);
+    return await handleCommonErrors(error, cb, retryAttempts);
+  }
+}
+
+const originalPost = http.post;
+async function post<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
+  url: string,
+  data?: D,
+  config?: AxiosRequestConfig<D>,
+  retryAttempts?: number,
+): Promise<R> {
+  try {
+    return await originalPost<T, R>(url, data, config).then(r => enrichResponse(r as CustomAxiosResponse<T>) as R);
+  } catch(err) {
+    const error = err as CustomAxiosError<T>;
+    const cb = () => post<T, R>(url, data, error.config);
+    return await handleCommonErrors(error, cb, retryAttempts);
+  }
+}
+
+const originalPut = http.put;
+async function put<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
+  url: string,
+  data?: D,
+  config?: AxiosRequestConfig<D>,
+  retryAttempts?: number,
+): Promise<R> {
+  try {
+    return await originalPut<T, R>(url, data, config).then(r => enrichResponse(r as CustomAxiosResponse<T>) as R);
+  } catch(err) {
+    const error = err as CustomAxiosError<T>;
+    const cb = () => put<T, R>(url, data, error.config);
+    return await handleCommonErrors(error, cb, retryAttempts);
   }
 }
 
 http.get = get;
-
-// Create a utility type to extract the inner type of data
-type ExtractData<T> = T extends { data: infer U } ? U : never;
-
-// Define the HttpResponse type that extends AxiosResponse
-type HttpResponse<T> = AxiosResponse<ExtractData<T>>;
-
-type CustomAxiosResult<TData = unknown, TErrorData = unknown> =
-  | (CustomAxiosResponse<TData> & { ok: true })
-  | (CustomAxiosError<TErrorData> & {
-    ok: false,
-    data?: TData,
-    statusText?: string,
-  })
+http.delete = del;
+http.post = post;
+http.put = put;
 
 export type {
+  CustomAxiosError,
+  AnyType,
+  CustomAxiosResponse,
+  CustomAxiosInstance,
   HttpResponse,
   CustomAxiosResult,
 };

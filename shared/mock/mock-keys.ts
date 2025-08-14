@@ -1,6 +1,8 @@
 const MOCK_KEYS = {
   USERS: "USERS",
   USER_INFO: "USER_INFO",
+  PORTFOLIO: "PORTFOLIO",
+  REFRESH_TOKEN: "REFRESH_TOKEN",
 }
 
 export default MOCK_KEYS

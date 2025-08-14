@@ -1,4 +1,4 @@
-import {HttpResponse} from "msw";
+import { HttpResponse } from "msw";
 import { CLIENT_MOCK_KEY } from '@/shared/constants';
 
 export function createMockCycle(clientMockKey?: string) {
