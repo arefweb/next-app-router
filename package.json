@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3223 --turbopack",
+    "dev": "nodemon --watch restart.flag --exec next dev -p 3223 --turbopack",
     "build": "next build",
     "start": "next start",
     "devServer": "yarn --cwd ./server dev",

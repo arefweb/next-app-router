@@ -1,6 +1,7 @@
 import QueryProvider from '@/shared/services/query/QueryProvider';
 import "./globals.css";
 import { MSWProvider } from "./msw-provider";
+import DevButton from "@/shared/components/dev-button";
 
 export default function RootLayout({
   children,
@@ -11,6 +12,7 @@ export default function RootLayout({
     <MSWProvider>
       <QueryProvider>
         {children}
+        <DevButton />
       </QueryProvider>
     </MSWProvider>
   );
