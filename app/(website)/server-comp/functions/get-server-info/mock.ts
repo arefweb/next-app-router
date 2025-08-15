@@ -1,10 +1,12 @@
 import { http, HttpResponse } from 'msw';
 import { createMockCycle } from "@/shared/mock/utils";
+import {BASE_URL} from "@/shared/constants";
+import {SERVER_INFO_ENDPOINT} from "./constants";
 
 const serverInfoMockHandler = () => {
   const mockCycle = createMockCycle();
 
-  return http.get("http://localhost:5005/api/server-info", () => {
+  return http.get(`${BASE_URL}${SERVER_INFO_ENDPOINT}`, () => {
     return mockCycle([
       HttpResponse.json({ message: 'Internal Server Error' }, { status: 500 }),
       HttpResponse.json({

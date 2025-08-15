@@ -3,6 +3,7 @@ import http, {HttpResponse} from "@/shared/services/http";
 import {
   RawResponse, ResponseBody, TransformedResponseBody,
 } from './types';
+import {USER_INFO_ENDPOINT} from "./constants";
 
 function transformResponse({
   data: {
@@ -25,7 +26,7 @@ function transformResponse({
 }
 
 export const getUserInfo = (): Promise<TransformedResponseBody> => {
-  const url = '/user-info';
+  const url = USER_INFO_ENDPOINT;
 
   return http.get<RawResponse>(
     url,

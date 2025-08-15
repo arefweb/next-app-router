@@ -1,6 +1,7 @@
 import axios, {
   AxiosRequestConfig,
 } from "axios";
+import { BASE_URL } from "@/shared/constants";
 
 import {
   CustomAxiosError,
@@ -13,7 +14,7 @@ import {
 import { handleCommonErrors, enrichResponse } from './utils';
 
 const http = axios.create({
-  baseURL: "http://localhost:5005/api",
+  baseURL: BASE_URL,
 }) as CustomAxiosInstance;
 http.defaults.headers.common["Authorization"] = "Bearer TESTI";
 

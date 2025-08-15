@@ -9,12 +9,17 @@ import {
 // eslint-disable-next-line
 export type AnyType = any;
 
-export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+export interface CustomAxiosRequestConfig<D = AnyType> extends AxiosRequestConfig<D> {
+  noAuth?: boolean;
+}
+
+export interface CustomAxiosErrorConfig extends InternalAxiosRequestConfig {
   retryNumber?: number;
+  noAuth?: boolean;
 }
 
 export interface CustomAxiosError<T = AnyType, D = AnyType> extends AxiosError<T, D> {
-  config?: CustomAxiosRequestConfig;
+  config?: CustomAxiosErrorConfig;
   ok: false;
 }
 
@@ -25,24 +30,24 @@ export interface CustomAxiosResponse<T = AnyType, D = AnyType> extends AxiosResp
 export interface CustomAxiosInstance extends AxiosInstance {
   get<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
     url: string,
-    config?: AxiosRequestConfig<D>,
+    config?: CustomAxiosRequestConfig<D>,
     retryAttempts?: number,
   ): Promise<R>;
   post<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
     url: string,
     data?: D,
-    config?: AxiosRequestConfig<D>,
+    config?: CustomAxiosRequestConfig<D>,
     retryAttempts?: number,
   ): Promise<R>;
   put<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
     url: string,
     data?: D,
-    config?: AxiosRequestConfig<D>,
+    config?: CustomAxiosRequestConfig<D>,
     retryAttempts?: number,
   ): Promise<R>;
   delete<T = AnyType, R = CustomAxiosResponse<T>, D = AnyType>(
     url: string,
-    config?: AxiosRequestConfig<D>,
+    config?: CustomAxiosRequestConfig<D>,
     retryAttempts?: number,
   ): Promise<R>;
 }

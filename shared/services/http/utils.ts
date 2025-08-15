@@ -9,25 +9,39 @@ let count401 = 0;
 let refreshResponse: string | null = null;
 
 async function handleRefresh() {
+  let refreshResult: CustomAxiosResponse;
+  let refreshError: CustomAxiosError;
   if (count401 === 0) {
     count401++;
-    createRefreshToken().then(() => refreshResponse = 'success')
-      .catch(() => refreshResponse = 'error');
+    createRefreshToken().then((r) => {
+      refreshResponse = 'success';
+      refreshResult = r;
+    }).catch((e) => {
+        refreshResponse = 'error';
+        refreshError = e;
+      });
   } else {
     count401++;
   }
   return new Promise((resolve, reject) => {
     const check = setInterval(() => {
       if (refreshResponse === 'success') {
-        resolve('success');
         clearInterval(check);
+        resolve(refreshResult);
       }
       if (refreshResponse === 'error') {
-        reject('error');
         clearInterval(check);
+        reject(refreshError);
       }
     }, 10);
   });
+}
+
+export function redirectToLogin() {
+  if (typeof window === "undefined") return;
+  const currentUrl = window.location.pathname + window.location.search;
+  const redirectParam   = encodeURIComponent(currentUrl);
+  window.location.replace(`/panel/login?redirect=${redirectParam}`);
 }
 
 export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>>
@@ -44,8 +58,8 @@ export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>
       }
     }
   }
-  if (error.status === 401 && error.config) {
-    return new Promise((resolve) => {
+  if (error.status === 401 && error.config && !error.config.noAuth) {
+    return new Promise((resolve, reject) => {
       return handleRefresh().then(() => {
         return callMethod().then((res) => {
           count401--;
@@ -54,7 +68,10 @@ export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>
           }
           resolve(res);
         });
-      });
+      }).catch((e) => {
+        redirectToLogin();
+        reject(e);
+      })
     });
   }
   const enrichedError = {

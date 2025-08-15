@@ -3,6 +3,7 @@ import http, { HttpResponse } from "@/shared/services/http";
 import {
   TransformedResponseBody, ResponseBody, RawResponse,
 } from './types';
+import {PORTFOLIO_ENDPOINT} from "./constants";
 
 function transformResponse({
   data,
@@ -25,7 +26,7 @@ function transformResponse({
 }
 
 export const getPortfolio = (): Promise<TransformedResponseBody> => {
-  const url = '/portfolio';
+  const url = PORTFOLIO_ENDPOINT;
   return http.get<RawResponse[]>(
     url,
   ).then(transformResponse);

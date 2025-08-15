@@ -1,10 +1,12 @@
 import { http, HttpResponse } from 'msw';
 import { createMockCycle } from "@/shared/mock/utils";
+import {BASE_URL} from "@/shared/constants";
+import {ADDRESS_ENDPOINT} from "./constants";
 
 const addressMockHandler = () => {
   const mockCycle = createMockCycle();
 
-  return http.get("http://localhost:5005/api/address", () => {
+  return http.get(`${BASE_URL}${ADDRESS_ENDPOINT}`, () => {
     return mockCycle([
       HttpResponse.json({ message: 'Bad Request' }, { status: 400 }),
       HttpResponse.json({ message: 'Internal Server Error' }, { status: 500 }),
