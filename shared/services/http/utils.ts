@@ -1,9 +1,9 @@
+import { createRefreshToken } from "@/shared/functions/hooks/use-create-refresh-token/requests";
 import {
   AnyType,
   CustomAxiosError,
   CustomAxiosResponse,
 } from './types';
-import { createRefreshToken } from "@/shared/functions/hooks/use-create-refresh-token/requests";
 
 let count401 = 0;
 let refreshResponse: string | null = null;
@@ -59,20 +59,16 @@ export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>
     }
   }
   if (error.status === 401 && error.config && !error.config.noAuth) {
-    return new Promise((resolve, reject) => {
-      return handleRefresh().then(() => {
-        return callMethod().then((res) => {
+    return new Promise((resolve, reject) => handleRefresh().then(() => callMethod().then((res) => {
           count401--;
           if (count401 === 0) {
             refreshResponse = null;
           }
           resolve(res);
-        });
-      }).catch((e) => {
+        })).catch((e) => {
         redirectToLogin();
         reject(e);
-      })
-    });
+      }));
   }
   const enrichedError = {
     ...error.toJSON?.() ?? {},
@@ -85,7 +81,7 @@ export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>
 
 
 export function enrichResponse<T, D>(response: CustomAxiosResponse<T, D>) {
-  const status = response.status;
+  const {status} = response;
   const ok = (status >= 200 && status < 300);
   if (status && (status >= 200 && status < 300)) {
     response.ok = true;

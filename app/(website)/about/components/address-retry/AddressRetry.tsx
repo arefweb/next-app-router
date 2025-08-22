@@ -21,7 +21,11 @@ function AddressRetry() {
     return (
       <div className="p-4 bg-red-50 border border-red-300 rounded">
         <p className="text-red-600">Client retry failed: {error?.message}</p>
-        <button onClick={() => refetch()} className="mt-2 px-4 py-1 bg-red-500 text-white rounded">
+        <button
+          type="button"
+          onClick={() => refetch()}
+          className="mt-2 px-4 py-1 bg-red-500 text-white rounded"
+        >
           Retry Again *
         </button>
       </div>

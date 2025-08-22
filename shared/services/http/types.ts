@@ -6,7 +6,6 @@ import {
   InternalAxiosRequestConfig,
 } from "axios";
 
-// eslint-disable-next-line
 export type AnyType = any;
 
 export interface CustomAxiosRequestConfig<D = AnyType> extends AxiosRequestConfig<D> {

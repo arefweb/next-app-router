@@ -29,7 +29,7 @@ async function AboutPage() {
           leading-[154.5%] tracking-wide sm:max-w-[508px] max-w-[400px] py-4">
             There are many variations of passages of Lorem Ipsum available, but
             the majority have suffered alteration in some form, buying to
-            injected humour, or randomized words which don't look even many
+            injected humour, or randomized words which don&#39;t look even many
             desktop publishing packages.
           </p>
         </div>

@@ -97,7 +97,7 @@ export type {
 
 export default http;
 
-{/** 
+/**
  With the above axios config I tried to address 3 concerns:
  1- Being able to have multiple axios instances
     Solution: it is possible by passing baseUrl in config from .get({ baseUrl: '' })
@@ -118,5 +118,5 @@ export default http;
        already sent, and you are waiting for the response. However, they should be kept in a list to
        be retried later after a new accessToken.  
   
-***/}
+** */
 

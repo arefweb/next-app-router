@@ -26,6 +26,7 @@ function DevButton() {
 
   return (
     <button
+      type="button"
       onClick={restartServer}
       disabled={restarting}
       style={{

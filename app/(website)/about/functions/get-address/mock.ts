@@ -6,8 +6,7 @@ import {ADDRESS_ENDPOINT} from "./constants";
 const addressMockHandler = () => {
   const mockCycle = createMockCycle();
 
-  return http.get(`${BASE_URL}${ADDRESS_ENDPOINT}`, () => {
-    return mockCycle([
+  return http.get(`${BASE_URL}${ADDRESS_ENDPOINT}`, () => mockCycle([
       HttpResponse.json({ message: 'Bad Request' }, { status: 400 }),
       HttpResponse.json({ message: 'Internal Server Error' }, { status: 500 }),
       HttpResponse.json({
@@ -19,8 +18,7 @@ const addressMockHandler = () => {
       HttpResponse.json({
         data: 'بدون آدرس'
       })
-    ]);
-  });
+    ]));
 }
 
 export default addressMockHandler;

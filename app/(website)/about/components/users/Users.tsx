@@ -17,7 +17,11 @@ function Users() {
       {isError && (
         <div>
           <p style={{ margin: 0, color: 'red'}}>Error</p>
-          <button onClick={() => refetch()} style={{ border: "1px solid red" }}>
+          <button
+            type="button"
+            onClick={() => refetch()}
+            style={{ border: "1px solid red" }}
+          >
             Retry
           </button>
         </div>

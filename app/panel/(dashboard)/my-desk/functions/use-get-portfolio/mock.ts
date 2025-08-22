@@ -9,8 +9,7 @@ import {PORTFOLIO_ENDPOINT} from "./constants";
 const portfolioMockHandler = () => {
   const mockCycle = createMockCycle(MOCK_KEYS.PORTFOLIO);
 
-  return http.get(`${BASE_URL}${PORTFOLIO_ENDPOINT}`, () => {
-    return mockCycle([
+  return http.get(`${BASE_URL}${PORTFOLIO_ENDPOINT}`, () => mockCycle([
       HttpResponse.json({ message: 'Unauthorized' }, { status: 401 }),
       HttpResponse.json<RawResponse[]>([
         {
@@ -21,8 +20,7 @@ const portfolioMockHandler = () => {
           close_price: 234,
         }
       ]),
-    ])
-  });
+    ]));
 }
 
 export default portfolioMockHandler;

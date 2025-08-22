@@ -19,8 +19,6 @@ function transformResponse({
   };
 }
 
-export const getUsers = async (): Promise<TransformedResponseBody> => {
-  return http.get<RawResponse[]>(
+export const getUsers = async (): Promise<TransformedResponseBody> => http.get<RawResponse[]>(
     USERS_ENDPOINT
-  ).then(transformResponse);
-}
+  ).then(transformResponse)

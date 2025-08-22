@@ -6,8 +6,7 @@ import {SERVER_INFO_ENDPOINT} from "./constants";
 const serverInfoMockHandler = () => {
   const mockCycle = createMockCycle();
 
-  return http.get(`${BASE_URL}${SERVER_INFO_ENDPOINT}`, () => {
-    return mockCycle([
+  return http.get(`${BASE_URL}${SERVER_INFO_ENDPOINT}`, () => mockCycle([
       HttpResponse.json({ message: 'Internal Server Error' }, { status: 500 }),
       HttpResponse.json({
         data: 'Server Components are able to fetch data independently.'
@@ -15,8 +14,7 @@ const serverInfoMockHandler = () => {
       HttpResponse.json({
         data: 'Server Components can also face API errors. Have you thought about it?'
       }),
-    ]);
-  });
+    ]));
 }
 
 export default serverInfoMockHandler;

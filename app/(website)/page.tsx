@@ -40,7 +40,7 @@ async function Home() {
         <div className="w-1/3 flex justify-center align-middle p-[1rem] text-center">
           <div className="shadow-sm p-4">
             <div className="mx-auto p-1.5 rounded-md my-2 bg-[#E8F5E9] w-max">
-              <Image src={members} alt={""} />
+              <Image src={members} alt="" />
             </div>
             <p className="text-2xl font-semibold">Membership Organisations</p>
             <p className="text-xs text-gray-500 mt-2 text-center">
@@ -52,7 +52,7 @@ async function Home() {
         <div className="w-1/3 flex justify-center align-middle p-[1rem] text-center">
           <div className="shadow-sm p-4">
             <div className="mx-auto p-1.5 rounded-md my-2 bg-[#E8F5E9] w-max">
-              <Image src={association} alt={""} />
+              <Image src={association} alt="" />
             </div>
             <p className="text-2xl font-semibold">National Associations</p>
             <p className="text-xs text-gray-500 mt-2 text-center">
@@ -64,7 +64,7 @@ async function Home() {
         <div className="w-1/3 flex justify-center align-middle p-[1rem] text-center">
           <div className="shadow-sm p-4">
             <div className="mx-auto p-1.5 rounded-md my-2 bg-[#E8F5E9] w-max">
-              <Image src={groups} alt={""} />
+              <Image src={groups} alt="" />
             </div>
             <p className="text-2xl font-semibold">Clubs And Groups</p>
             <p className="text-xs text-gray-500 mt-2 text-center">
