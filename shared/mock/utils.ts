@@ -18,7 +18,7 @@ export function createMockCycle(clientMockKey?: string) {
         [clientMockKey]: (counter + 1) % mocks.length,
       }));
     }
-    counter++;
+    counter += 1;
     return mocks[turn];
   }
 }

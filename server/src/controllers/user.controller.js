@@ -1,6 +1,6 @@
 let counter = 0;
 
-const getUsers = (req, res, next) => {
+const getUsers = (req, res) => {
   if (counter % 2 === 0) {
     res.status(200).json([
       {
@@ -20,10 +20,10 @@ const getUsers = (req, res, next) => {
   counter += 1;
 }
 
-const getUser = (req, res, next) => {
-  const id = req.params.id;
+const getUser = (req, res) => {
+  const {id} = req.params;
   res.status(200).json({
-    id: id,
+    id,
     first_name: "John",
     last_name: "Doe",
   })

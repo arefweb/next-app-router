@@ -1,4 +1,7 @@
-import { createRefreshToken } from "@/shared/functions/hooks/use-create-refresh-token/requests";
+/* eslint-disable no-param-reassign */
+import axios, { AxiosResponse, AxiosError } from 'axios';
+import { BASE_URL } from "@/shared/constants";
+
 import {
   AnyType,
   CustomAxiosError,
@@ -9,11 +12,15 @@ let count401 = 0;
 let refreshResponse: string | null = null;
 
 async function handleRefresh() {
-  let refreshResult: CustomAxiosResponse;
-  let refreshError: CustomAxiosError;
+  let refreshResult: AxiosResponse;
+  let refreshError: AxiosError;
   if (count401 === 0) {
-    count401++;
-    createRefreshToken().then((r) => {
+    count401 += 1;
+    axios.post(
+      '/token/refresh',
+      undefined,
+      { baseURL: BASE_URL }
+    ).then((r) => {
       refreshResponse = 'success';
       refreshResult = r;
     }).catch((e) => {
@@ -21,7 +28,7 @@ async function handleRefresh() {
         refreshError = e;
       });
   } else {
-    count401++;
+    count401 += 1;
   }
   return new Promise((resolve, reject) => {
     const check = setInterval(() => {
@@ -58,17 +65,19 @@ export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>
       }
     }
   }
-  if (error.status === 401 && error.config && !error.config.noAuth) {
-    return new Promise((resolve, reject) => handleRefresh().then(() => callMethod().then((res) => {
-          count401--;
+  if (error.status === 401 && error.config) {
+    return new Promise((resolve, reject) => {
+      handleRefresh().then(() => callMethod().then((res) => {
+          count401 -= 1;
           if (count401 === 0) {
             refreshResponse = null;
           }
           resolve(res);
         })).catch((e) => {
-        redirectToLogin();
-        reject(e);
-      }));
+          redirectToLogin();
+          reject(e);
+      });
+    });
   }
   const enrichedError = {
     ...error.toJSON?.() ?? {},
