@@ -63,7 +63,8 @@ const eslintConfig = [
         "optionalDependencies": false,
         "peerDependencies": false}
       ],
-      'import/prefer-default-export': 'off'
+      'import/prefer-default-export': 'off',
+      'import/extensions': 'off'
     },
   },
 ];

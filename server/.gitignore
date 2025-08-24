@@ -10,3 +10,6 @@ yarn-error.log
 
 # Code coverage
 coverage
+
+# Miscellaneous
+dev.sqlite3
