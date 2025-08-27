@@ -1,1 +1,1 @@
-export const CREATE_REFRESH_ENDPOINT = '/token/refresh';
+export const CREATE_REFRESH_ENDPOINT = '/auth/refresh';

@@ -1,6 +1,6 @@
-/* eslint-disable no-param-reassign */
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { BASE_URL } from "@/shared/constants";
+import { redirectToLogin } from "@/shared/functions/utils";
 
 import {
   AnyType,
@@ -8,48 +8,65 @@ import {
   CustomAxiosResponse,
 } from './types';
 
-let count401 = 0;
-let refreshResponse: string | null = null;
+class RefreshToken {
+  private count401: number;
+  private refreshResponse: string | null = null;
+  constructor() {
+    this.count401 = 0;
+  }
+  increment401(): void {
+    this.count401 += 1;
+  }
+  decrement401(): void {
+    this.count401 -= 1;
+  }
+  getCount401(): number {
+    return this.count401;
+  }
+  setRefreshResponse(resp: string | null): void {
+    this.refreshResponse = resp;
+  }
+  getRefreshResponse(): string | null {
+    return this.refreshResponse;
+  }
 
-async function handleRefresh() {
-  let refreshResult: AxiosResponse;
-  let refreshError: AxiosError;
-  if (count401 === 0) {
-    count401 += 1;
-    axios.post(
-      '/token/refresh',
-      undefined,
-      { baseURL: BASE_URL }
-    ).then((r) => {
-      refreshResponse = 'success';
-      refreshResult = r;
-    }).catch((e) => {
-        refreshResponse = 'error';
+  async handleRefresh() {
+    let refreshResult: AxiosResponse;
+    let refreshError: AxiosError;
+
+    if (this.count401 === 0) {
+      this.increment401();
+      axios.post(
+        '/auth/refresh',
+        undefined,
+        { baseURL: BASE_URL }
+      ).then((r) => {
+        this.setRefreshResponse('success');
+        refreshResult = r;
+      }).catch((e) => {
+        this.setRefreshResponse('error');
         refreshError = e;
       });
-  } else {
-    count401 += 1;
+    } else {
+      this.increment401();
+    }
+
+    return new Promise((resolve, reject) => {
+      const check = setInterval(() => {
+        if (this.getRefreshResponse() === 'success') {
+          clearInterval(check);
+          resolve(refreshResult);
+        }
+        if (this.getRefreshResponse() === 'error') {
+          clearInterval(check);
+          reject(refreshError);
+        }
+      }, 10);
+    });
   }
-  return new Promise((resolve, reject) => {
-    const check = setInterval(() => {
-      if (refreshResponse === 'success') {
-        clearInterval(check);
-        resolve(refreshResult);
-      }
-      if (refreshResponse === 'error') {
-        clearInterval(check);
-        reject(refreshError);
-      }
-    }, 10);
-  });
 }
 
-export function redirectToLogin() {
-  if (typeof window === "undefined") return;
-  const currentUrl = window.location.pathname + window.location.search;
-  const redirectParam   = encodeURIComponent(currentUrl);
-  window.location.replace(`/panel/login?redirect=${redirectParam}`);
-}
+const refreshToken = new RefreshToken();
 
 export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>>
 (error: CustomAxiosError<T>, callMethod: () => Promise<R>, retryAttempts?: number): Promise<R> {
@@ -65,12 +82,12 @@ export async function handleCommonErrors<T = AnyType, R = CustomAxiosResponse<T>
       }
     }
   }
-  if (error.status === 401 && error.config) {
+  if (error.status === 401 && error.config && !error.config.noAuth) {
     return new Promise((resolve, reject) => {
-      handleRefresh().then(() => callMethod().then((res) => {
-          count401 -= 1;
-          if (count401 === 0) {
-            refreshResponse = null;
+      refreshToken.handleRefresh().then(() => callMethod().then((res) => {
+          refreshToken.decrement401();
+          if (refreshToken.getCount401() === 0) {
+            refreshToken.setRefreshResponse(null);
           }
           resolve(res);
         })).catch((e) => {

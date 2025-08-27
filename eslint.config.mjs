@@ -64,7 +64,9 @@ const eslintConfig = [
         "peerDependencies": false}
       ],
       'import/prefer-default-export': 'off',
-      'import/extensions': 'off'
+      'import/extensions': 'off',
+      'react/jsx-props-no-spreading': 'off',
+      'no-param-reassign': 'off'
     },
   },
 ];
