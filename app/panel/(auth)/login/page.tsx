@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from "next/navigation";
 import {useAppDispatch} from "@/shared/services/store";
@@ -28,6 +28,13 @@ function Login() {
     isError,
     error,
   } = useLogin();
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      router.replace("/panel/my-desk");
+    }
+  }, [router]);
 
   function onSubmit(formData: FormInputTypes) {
     mutateAsync(formData).then((data) => {

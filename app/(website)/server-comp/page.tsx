@@ -1,14 +1,7 @@
 import getServerInfo from "./functions/get-server-info";
 
-
 async function ServerComp() {
   const response = await getServerInfo();
-  console.log('serverComp response > ', {
-    data: response?.data,
-    status: response?.status,
-    statusText: response?.statusText,
-    ok: response?.ok,
-  });
 
   if (!response?.ok) {
     return (
