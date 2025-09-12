@@ -34,7 +34,6 @@ function AddressRetry() {
 
   return (
     <div>
-      <h3>Address:</h3>
       <p className="font-bold">{data?.data.data}</p>
     </div>
   );

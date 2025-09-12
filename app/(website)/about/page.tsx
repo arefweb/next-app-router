@@ -1,3 +1,8 @@
+import Image from 'next/image';
+import contact from '@/assets/images/contact.jpg';
+import location from '@/assets/images/location.png';
+import team from '@/assets/images/teamwork.png';
+
 import Users from "./components/users/Users";
 import getAddress from './functions/get-address';
 import AddressRetry from './components/address-retry/AddressRetry';
@@ -7,34 +12,31 @@ async function AboutPage() {
   const address = response?.data?.data;
 
   return (
-    <div className="flex flex-col bg-[#EBF3F5] items-center justify-center sm:px-8 px-0 ss:py-12">
-      {response.ok ? (
-        <div>
-          <h3>Address:</h3>
-          <p className="font-bold">{address}</p>
+    <div className="px-4 max-w-[82rem] mx-auto">
+      <div className="flex flex-wrap md:flex-nowrap">
+        <div className="md:basis-1/2 basis-full">
+          <Image src={contact} alt="contact" className="h-[100px] md:h-full object-cover" />
         </div>
-      ) : (<AddressRetry />)}
-      <div className="flex sm:flex-row flex-col bg-[#1E2C30]
-      md:my-8 my-0 py-8 sm:px-6 px-4 items-center
-      justify-center ss:rounded-[20px] rounded-none">
-        <div className="flex flex-col md:px-16 px-0 pl-8 md:py-0 sm:py-6 py-4">
-          <p className="text-[#FFF] font-manrope text-[15px] font-normal leading-[154.5%] tracking-wide uppercase">
-            about us
-          </p>
-          <h4 className="text-[#FFF] font-playfair md:text-[50px] text-[36px]
-          font-semibold leading-[130%] tracking-tight max-w-[460px] pt-4">
-            Style is a Reflection of your Attitude & your Personality
-          </h4>
-          <p className="text-[#FFF] font-manrope text-[16px] font-normal
-          leading-[154.5%] tracking-wide sm:max-w-[508px] max-w-[400px] py-4">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration in some form, buying to
-            injected humour, or randomized words which don&#39;t look even many
-            desktop publishing packages.
-          </p>
+        <div className="md:basis-1/2 basis-full flex flex-col justify-around">
+          <section>
+            <Image src={location} alt="address" width={50} height={50} />
+            <h2 className="text-2xl/12 text-gray-700">
+              Address
+            </h2>
+            {response.ok ? (
+              <p className="font-bold">{address}</p>
+            ) : (<AddressRetry />)}
+          </section>
+
+          <section>
+            <Image src={team} alt="team" width={50} height={50} />
+            <h2 className="text-2xl/12 text-gray-700">
+              Our Team
+            </h2>
+            <Users />
+          </section>
         </div>
       </div>
-      <Users />
     </div>
   );
 }

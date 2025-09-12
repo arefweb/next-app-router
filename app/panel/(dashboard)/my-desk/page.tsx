@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useCallback, useMemo } from 'react';
-import logout from "@/shared/functions/utils/logout";
 
 import useGetUserInfo from './functions/use-get-user-info';
 import useGetPortfolio from "./functions/use-get-portfolio";
@@ -55,13 +54,6 @@ function MyDesk() {
         className="border border-gray-200 rounded-md bg-white p-2 block m-2 cursor-pointer"
       >
         Fetch
-      </button>
-      <button
-        type="button"
-        onClick={() => logout()}
-        className="border border-gray-200 rounded-md bg-white p-2 block m-2 cursor-pointer"
-      >
-        Log out
       </button>
     </div>
   );

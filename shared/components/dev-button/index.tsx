@@ -44,8 +44,12 @@ function DevButton() {
         opacity: 0.8,
       }}
     >
-      <span>
+      <span className="relative group">
         {restarting ? <>🛠</> : <>🔄</>}
+        <i className="absolute left-[-0.9rem] top-[-3rem] hidden group-hover:inline-block
+        text-sm text-gray-600 bg-orange-300">
+          Restart Next.js
+        </i>
       </span>
     </button>
   );

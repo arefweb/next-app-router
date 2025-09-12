@@ -5,7 +5,7 @@ async function ServerComp() {
 
   if (!response?.ok) {
     return (
-      <div>
+      <div className="p-2 min-h-[calc(100dvh-132px)] text-red-700">
         <p>An Error occurred.</p>
         {response?.message}
       </div>
@@ -13,9 +13,9 @@ async function ServerComp() {
   }
 
   return (
-    <div className="p-2">
-      <p className="mb-5">Hi, this is your message:</p>
-      <p className="text-orange-500">
+    <div className="p-2 min-h-[calc(100dvh-132px)]">
+      <p className="mb-5 text-xl">Hi, this is your message:</p>
+      <p className="text-blue-600 text-lg">
         {response.data.data}
       </p>
     </div>

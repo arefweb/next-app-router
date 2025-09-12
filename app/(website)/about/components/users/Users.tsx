@@ -13,7 +13,6 @@ function Users() {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold">List Of Users (client component):</h3>
       {isError && (
         <div>
           <p style={{ margin: 0, color: 'red'}}>Error</p>
@@ -29,13 +28,15 @@ function Users() {
       {isLoading && (
         <p style={{ margin: 0}}>Loading...</p>
       )}
-      <ul className="list-disc">
-        {entities?.map((item) => (
-          <li key={item.fullName}>
-            {item.fullName}
-          </li>
-        ))}
-      </ul>
+      {!isError && !isLoading && (
+        <ul className="list-disc">
+          {entities?.map((item) => (
+            <li key={item.fullName}>
+              {item.fullName}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

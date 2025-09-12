@@ -9,8 +9,11 @@ const usersMockHandler = () => {
   const mockCycle = createMockCycle(MOCK_KEYS.USERS);
 
   return http.get(`${BASE_URL}${USERS_ENDPOINT}`, () => mockCycle([
-      HttpResponse.json([{ first_name: "عباس", last_name: "معصومی" }]),
-      HttpResponse.json([{ first_name: "عارف", last_name: "موحدزاده" }]),
+      HttpResponse.json([
+        { first_name: "Mark", last_name: "Twain" },
+        { first_name: "Thomas", last_name: "Edison" },
+        { first_name: "Michael", last_name: "Jackson" }
+      ]),
       HttpResponse.json({ error: 'Internal Server Error' }, { status: 500 }),
     ]));
 }

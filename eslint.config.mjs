@@ -66,7 +66,8 @@ const eslintConfig = [
       'import/prefer-default-export': 'off',
       'import/extensions': 'off',
       'react/jsx-props-no-spreading': 'off',
-      'no-param-reassign': 'off'
+      'no-param-reassign': 'off',
+      'react/require-default-props': 'off'
     },
   },
 ];
