@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { healthCheckController } from '@/api/controllers/health.controller.js';
-import { createUserController } from '@/api/controllers/user.controller.js';
 import {
   signupController,
   loginController,
@@ -31,7 +30,7 @@ router.get('/users/profile', isAuthenticated, async (req: any, res) => {
   if (!user) {
     return res.status(404).json({ error: 'User not found.' });
   }
-  res.json(user);
+  return res.json(user);
 });
 
 

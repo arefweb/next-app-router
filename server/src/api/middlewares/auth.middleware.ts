@@ -7,6 +7,7 @@ interface AuthenticatedRequest extends Request {
   user?: { id: number };
 }
 
+// eslint-disable-next-line consistent-return
 export const isAuthenticated = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   const { accessToken } = req.cookies;
 
@@ -18,6 +19,7 @@ export const isAuthenticated = (req: AuthenticatedRequest, res: Response, next: 
     const decoded = jwt.verify(accessToken, config.jwt.accessTokenSecret) as { id: number };
     req.user = { id: decoded.id };
     next();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return res.status(401).json({ error: 'Not authorized, token failed.' });
   }
