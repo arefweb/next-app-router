@@ -9,7 +9,11 @@ Next.js project is provided.
 ## How to run the project?
 In order to run the project we need to run both *backend* and *frontend* of the project. 
 
-So first we will run the backend, while we are in the root of the project with this command:
+First install the packages in both `server` and Next.js root with:
+
+> yarn install
+
+After that we will run the backend, while we are in the root of the project with this command:
 > yarn devServer
 
 Then we will run the **Next.js** App in a new terminal with this command:
