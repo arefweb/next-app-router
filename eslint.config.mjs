@@ -17,7 +17,15 @@ const compat = new FlatCompat({
 const eslintConfig = [
   // Global ignores
   {
-    ignores: ['node_modules/', '.next/', 'dist/', 'build/'],
+    ignores: [
+      'node_modules/',
+      '.next/',
+      'dist/',
+      'build/',
+      'test-results/',
+      'tests/',
+      'playwright-report/'
+    ],
   },
 
   // Base configuration for all JavaScript/TypeScript files
