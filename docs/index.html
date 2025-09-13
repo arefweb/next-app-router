@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Next app router intro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <main class="bg-orange-50 min-h-dvh p-4">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-2xl font-bold mb-4">
+        About Next app router - Cryptocurrency website
+      </h1>
+
+      <p class="text-blue-700 mb-3">
+        <a
+            href="https://github.com/arefweb/next-app-router"
+            class="underline"
+        >
+          View the Code on GitHub
+        </a>
+      </p>
+
+      <h2 class="text-xl font-bold mb-2">
+        Introduction
+      </h2>
+      <p>
+        This project is not about showcasing a fancy UI, but
+        is created with the intention of providing required
+        <strong>Infrastructure</strong> of a modern Next.js
+        application.
+      </p>
+      <p>
+        The Goal is to provide a ready-made
+        starting point for a frontend developer to begin their
+        work and focus mainly on creating components and
+        not to worry about behind the scenes.
+      </p>
+      <p>
+        In this project we have created an express.js backend
+        for providing some API and establishing our
+        authentication and authorization.
+      </p>
+      <br />
+
+      <h2 class="text-xl font-bold mb-2">
+        Features
+      </h2>
+      <p class="mb-3">
+        In a nutshell, I can list the features of the project
+        as below:
+      </p>
+      <ul class="list-disc ml-4">
+        <li>
+          <strong>API Mock capability</strong>: Mocking API
+          endpoints is crucial in developing frontend
+          applications, specially if you want to implement
+          all the states of an API (success, loading, error).
+          Also, API Mock capability is needed if you want
+          to have e2e tests in your project and be
+          independent of your API. <br />
+          For that matter I created mock capability using
+          MSW package and integrated it with Next.js. Also,
+          we have some customization in our mocks, so that
+          it has a cycle. meaning in each new request you can
+          get a new response. This capability is engineered
+          alongside with our mocks.
+        </li>
+        <li>
+          <strong>E2E Tests</strong>: I added the E2E testing
+          capability utilizing PlayWright package which
+          is a strong and complete solution for testing.
+          Benefiting from our API Mock capability,
+          testing features with playwright becomes a breeze.
+        </li>
+        <li>
+          <strong>Express.js Server</strong>: In order to
+          be able to efficiently implement <b>auth</b> operations,
+          I created an Express.js server. This server is
+          a complete boilerplate project on its own. Because
+          it has been developed using
+          <i class="text-blue-500">typescript</i>, and
+          it has its own database which is
+          <i class="text-blue-500">sqlite</i>.
+          When you sign up and create a new account, actually
+          a new record is added to the database. <br />
+          refresh token and access token are provided with
+          HTTP Only cookies to replicate a better security.
+        </li>
+        <li>
+          <strong>Front Panel</strong>: This section of the
+          app is intended to be behind a login page. Meaning
+          first you need to sign up and have an account.
+          Then from the Login from you can access the dashboard.
+          In the code this section is separated from the website
+          and has its own layout and works like an SPA.
+        </li>
+        <li>
+          <strong>Comprehensive Error Handling</strong>:
+          Error handling, specially in a Next.js app was
+          important for me. So I handled most probable cases
+          of errors in a Next.js application. If you request
+          some API endpoints more than once or click on menu
+          items more than once you can see it in action.
+        </li>
+        <li>
+          <strong>Miscellaneous</strong>: There are a lot of
+          different points and features that are implemented in
+          the project that we suffice to just name them here:
+          <br />
+          <ul class="list-disc list-inside">
+            <li>
+              Development button to restart the Next.js
+              server just by clicking on it in the UI.
+            </li>
+            <li>
+              GitHub actions - to check the typescript and
+              eslint errors in the CI.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <br />
+
+      <h2 class="text-xl font-bold mb-2">
+        How to run the project?
+      </h2>
+      <p>
+        After cloning the code from
+        <a
+          href="https://github.com/arefweb/next-app-router"
+          class="text-blue-500 hover:text-blue-700 underline"
+        >
+          THIS
+        </a>
+        repository you will need to install the dependencies
+        for both frontend and backend like this:
+      </p>
+      <p>
+        First install the frontend packages like:
+      </p>
+      <code class="bg-gray-900 text-white px-2">
+        yarn install
+      </code>
+      <p>
+        then for the backend:
+      </p>
+      <code class="bg-gray-900 text-white px-2">
+        cd server
+      </code>
+      <br />
+      <code class="bg-gray-900 text-white px-2">
+        yarn install
+      </code>
+      <p>
+        After making sure that packages are installed
+        go to the Next.js root and run these commands:
+      </p>
+      <code class="bg-gray-900 text-white px-2">
+        yarn devServer
+      </code>
+      <br />
+      <code class="bg-gray-900 text-white px-2">
+        yarn dev
+      </code>
+      <br />
+
+      <h2 class="text-xl font-bold my-2">
+        Notes:
+      </h2>
+      <p>
+        mock capability is enabled by default in the
+        <i>.env</i> file.
+      </p>
+    </div>
+  </main>
+</body>
+</html>
